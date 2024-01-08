@@ -1,0 +1,88 @@
+﻿<Window x:Class="WpfSQLite.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfSQLite"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid Background="#1a1a1a">
+        <StackPanel Width="600px">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Margin="0 0 0 7.5px">
+                            <TextBlock Text="Title:" Margin="0 5px" Foreground="White" FontWeight="Bold"/>
+                            <TextBox x:Name="textbox_title" Background="#fac864"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Margin="0 7.5px">
+                            <TextBlock Text="Album:" Margin="0 5px" Foreground="White" FontWeight="Bold"/>
+                            <TextBox x:Name="textbox_album" Background="#fac864"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Margin="0 7.5px">
+                            <TextBlock Text="MediaType:" Margin="0 5px" Foreground="White" FontWeight="Bold"/>
+                            <TextBox x:Name="textbox_mediatype" Background="#fac864"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Margin="0 7.5px">
+                            <TextBlock Text="Genre:" Margin="0 5px" Foreground="White" FontWeight="Bold"/>
+                            <TextBox x:Name="textbox_genre" Background="#fac864"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="30px">
+                    <Border BorderBrush="#fac864" BorderThickness="3" CornerRadius="10">
+                        <Image Source="src/past-image.jpg"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+            <Border BorderBrush="#fac864" BorderThickness="0 1 0 1" CornerRadius="20">
+                <StackPanel Orientation="Horizontal" Margin="0 20 0 20">
+                    <Button Click="insertDate" Width="146" Background="white" Margin="2px 0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="INSERT" FontWeight="bold"/>
+                            <Image Source="src/insert.png" Width="16" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="selectDate" Width="146" Background="white" FontWeight="bold" Margin="2px 0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="SELECT" FontWeight="bold"/>
+                            <Image Source="src/select.png" Width="16" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="saveDate" Width="146" Background="white" Margin="2px 0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="SAVE" FontWeight="bold"/>
+                            <Image Source="src/save.png" Width="16" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="clearDate" Width="146" Background="white" FontWeight="bold" Margin="2px 0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="CLEAR" FontWeight="bold"/>
+                            <Image Source="src/clear.png" Width="16" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <DataGrid x:Name="mainDataGrid" Margin="0 20 0 0"/>
+        </StackPanel>
+    </Grid>
+</Window>
+<!-- 
+            <DataGrid x:Name="mainDataGrid" AutoGenerateColumns="False"/>
+-->
