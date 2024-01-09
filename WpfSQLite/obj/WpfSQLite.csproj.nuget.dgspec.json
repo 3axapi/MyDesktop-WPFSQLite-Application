@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\WpfSQLite\\WpfSQLite\\WpfSQLite.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\MyDesktop-WPFSQLite-Application\\WpfSQLite\\WpfSQLite.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\WpfSQLite\\WpfSQLite\\WpfSQLite.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\MyDesktop-WPFSQLite-Application\\WpfSQLite\\WpfSQLite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\WpfSQLite\\WpfSQLite\\WpfSQLite.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\MyDesktop-WPFSQLite-Application\\WpfSQLite\\WpfSQLite.csproj",
         "projectName": "WpfSQLite",
-        "projectPath": "C:\\Users\\User\\source\\repos\\WpfSQLite\\WpfSQLite\\WpfSQLite.csproj",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\MyDesktop-WPFSQLite-Application\\WpfSQLite\\WpfSQLite.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\WpfSQLite\\WpfSQLite\\obj\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\MyDesktop-WPFSQLite-Application\\WpfSQLite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

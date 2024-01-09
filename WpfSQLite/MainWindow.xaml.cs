@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfSQLite.Modules;
+using WpfSQLite;
+using System.Windows.Controls.Primitives;
 
 namespace WpfSQLite
 {
@@ -27,11 +29,32 @@ namespace WpfSQLite
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
+            loadDate();
         }
 
         private void loadDate()
         {
-            mainDataGrid.ItemsSource = "";
+            mainDataGrid.ItemsSource = ((MainViewModel)DataContext).Tracks
+                .Join(((MainViewModel)DataContext).Albums,
+                trakc => trakc.Id,
+                album => album.TrackId,
+                (track, album) => new
+                {
+                    track.Id,
+                    track.Name,
+                    album.Title
+                })
+                .Join(((MainViewModel)DataContext).MediaTypes,
+                trackWithAlbum => trackWithAlbum.Id,
+                mediaType => mediaType.TrackId,
+                (trackWithAlbum, mediaType) => new
+                {
+                    trackWithAlbum.Id,
+                    trackWithAlbum.Name,
+                    trackWithAlbum.Title,
+                    mediaType.MediaTypeId
+                }
         }
 
         private void insertDate(object sender, RoutedEventArgs e)
@@ -68,74 +91,6 @@ namespace WpfSQLite
         private void clearDate(object sender, RoutedEventArgs e)
         {
 
-        }
-    }
-    public class MainViewModel
-    {
-
-        private const string connectionString = "Data Source=Database\\chinook.db;Version=3";
-
-        public List<Album> Albums { get; set; }
-        public List<MediaType> MediaTypes { get; set; }
-        public List<Genre> Genres { get; set; }
-
-        public MainViewModel()
-        {
-
-            Albums = new List<Album>(); bool isA = true;
-            MediaTypes = new List<MediaType>(); bool isM = true;
-            Genres = new List<Genre>(); bool isG = true;
-
-            List<string> querys = new List<string>
-            {
-                "SELECT AlbumId, Title FROM albums",
-                "SELECT MediaTypeId, Name FROM albums",
-                "SELECT GenreId, Name FROM albums"
-            };
-
-            foreach (string query in querys)
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
-                using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                {
-                    connection.Open();
-
-                    using(SQLiteDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            if (isA)
-                            {
-                                Albums.Add(new Album
-                                {
-                                    Id = Convert.ToInt16(reader["AlbumId"]),
-                                    Title = reader["Title"].ToString()
-                                });
-                            }
-                            else if (isM)
-                            {
-                                MediaTypes.Add(new MediaType
-                                {
-                                    Id = Convert.ToInt16(reader["MediaTypeId"]),
-                                    Name = reader["Name"].ToString()
-                                });
-                            }
-                            else if (isG)
-                            {
-                                Genres.Add(new Genre
-                                {
-                                    Id = Convert.ToInt16(reader["GenreId"]),
-                                    Name = reader["Name"].ToString()
-                                });
-                            }
-                        }
-
-                        if (isA) isA = false;
-                        else if (isM) isM = false;
-                        else if (isG) isG = false;
-                    }
-                }
-            }
         }
     }
 }

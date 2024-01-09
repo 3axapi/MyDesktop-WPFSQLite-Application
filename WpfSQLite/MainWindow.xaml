@@ -79,7 +79,11 @@
                     </Button>
                 </StackPanel>
             </Border>
-            <DataGrid x:Name="mainDataGrid" Margin="0 20 0 0"/>
+            <DataGrid x:Name="mainDataGrid" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
     </Grid>
 </Window>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\User\source\repos\WpfSQLite\WpfSQLite\obj\Debug\net6.0-windows\
+C:\Users\User\Documents\GitHub\MyDesktop-WPFSQLite-Application\WpfSQLite\obj\Debug\net6.0-windows\
 WpfSQLite
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\User\source\repos\WpfSQLite\WpfSQLite\App.xaml
+C:\Users\User\Documents\GitHub\MyDesktop-WPFSQLite-Application\WpfSQLite\App.xaml
 11407045341
 51180426770
 944719500
 1991325104035
 MainWindow.xaml;
 
-True
+False
 
