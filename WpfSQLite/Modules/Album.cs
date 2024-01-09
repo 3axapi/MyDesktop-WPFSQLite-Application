@@ -8,8 +8,7 @@ namespace WpfSQLite.Modules
 {
     public class Album
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public int
+        public string ATitle { get; set; }
+        public int TrackId { get; set; }
     }
 }

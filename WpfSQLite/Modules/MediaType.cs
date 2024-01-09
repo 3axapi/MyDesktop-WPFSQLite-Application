@@ -8,7 +8,7 @@ namespace WpfSQLite.Modules
 {
     public class MediaType
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string MName { get; set; }
+        public int TrackId { get; set; }
     }
 }

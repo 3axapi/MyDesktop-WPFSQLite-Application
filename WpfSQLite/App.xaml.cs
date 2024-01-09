@@ -41,24 +41,33 @@ namespace WpfSQLite
             */
 
             /*
-            SELECT albums.Title, tracks.TrackId                         media_types
+            SELECT media_types.Name, tracks.TrackId                         media_types
             FROM tracks
-            INNER JOIN albums
-            ON tracks.AlbumId = albums.AlbumId
+            INNER JOIN media_types
+            ON tracks.MediaTypeId = media_types.MediaTypeId
             */
 
             /*
-            SELECT albums.Title, tracks.TrackId                         genres
+            SELECT genres.Name, tracks.TrackId                         genres
             FROM tracks
-            INNER JOIN albums
-            ON tracks.AlbumId = albums.AlbumId
+            INNER JOIN genres
+            ON tracks.GenreId = genres.GenreId
             */
 
             List<string> querys = new List<string>
             {
-                "SELECT AlbumId, Title FROM albums",
-                "SELECT MediaTypeId, Name FROM albums",
-                "SELECT GenreId, Name FROM albums"
+                "SELECT albums.Title, tracks.TrackId" +
+                    "FROM tracks" +
+                    "INNER JOIN albums" +
+                    "ON tracks.AlbumId = albums.AlbumId",
+                "SELECT media_types.Name, tracks.TrackId" +
+                    "FROM tracks" +
+                    "INNER JOIN media_types" +
+                    "ON tracks.MediaTypeId = media_types.MediaTypeId",
+                "SELECT genres.Name, tracks.TrackId" +
+                    "FROM tracks" +
+                    "INNER JOIN genres" +
+                    "ON tracks.GenreId = genres.GenreId"
             };
 
             foreach (string query in querys)
@@ -87,24 +96,24 @@ namespace WpfSQLite
                             {
                                 Albums.Add(new Album
                                 {
-                                    Id = Convert.ToInt16(reader["AlbumId"]),
-                                    Title = reader["Title"].ToString()
+                                    ATitle = reader["Title"].ToString(),
+                                    TrackId = Convert.ToInt16(reader["TrackId"]),
                                 });
                             }
                             else if (isM)
                             {
                                 MediaTypes.Add(new MediaType
                                 {
-                                    Id = Convert.ToInt16(reader["MediaTypeId"]),
-                                    Name = reader["Name"].ToString()
+                                    MName = reader["Name"].ToString(),
+                                    TrackId = Convert.ToInt16(reader["TrackId"])
                                 });
                             }
                             else if (isG)
                             {
                                 Genres.Add(new Genre
                                 {
-                                    Id = Convert.ToInt16(reader["GenreId"]),
-                                    Name = reader["Name"].ToString()
+                                    GName = reader["Name"].ToString(),
+                                    TrackId = Convert.ToInt16(reader["TrackId"])
                                 });
                             }
                         }

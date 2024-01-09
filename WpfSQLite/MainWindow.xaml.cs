@@ -53,7 +53,7 @@ namespace WpfSQLite
                     trackWithAlbum.Id,
                     trackWithAlbum.Name,
                     trackWithAlbum.Title,
-                    mediaType.MediaTypeId
+                    mediaType.Name,
                 }
         }
 
