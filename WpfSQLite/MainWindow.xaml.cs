@@ -43,7 +43,7 @@ namespace WpfSQLite
                 {
                     track.Id,
                     track.Name,
-                    album.Title
+                    album.ATitle
                 })
                 .Join(((MainViewModel)DataContext).MediaTypes,
                 trackWithAlbum => trackWithAlbum.Id,
@@ -52,9 +52,20 @@ namespace WpfSQLite
                 {
                     trackWithAlbum.Id,
                     trackWithAlbum.Name,
-                    trackWithAlbum.Title,
-                    mediaType.Name,
-                }
+                    trackWithAlbum.ATitle,
+                    mediaType.MName
+                })
+                .Join(((MainViewModel)DataContext).Genres,
+                trackWithAlbum => trackWithAlbum.Id,
+                genre => genre.TrackId,
+                (trackWithAlbum, genre) => new
+                {
+                    trackWithAlbum.Id,
+                    trackWithAlbum.Name,
+                    trackWithAlbum.ATitle,
+                    trackWithAlbum.MName,
+                    genre.GName
+                }).ToList();
         }
 
         private void insertDate(object sender, RoutedEventArgs e)
