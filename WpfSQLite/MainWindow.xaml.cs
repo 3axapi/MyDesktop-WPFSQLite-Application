@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using WpfSQLite.Modules;
 using WpfSQLite;
 using System.Windows.Controls.Primitives;
+using System.Diagnostics.Metrics;
 
 namespace WpfSQLite
 {
@@ -30,10 +31,9 @@ namespace WpfSQLite
         {
             InitializeComponent();
             DataContext = new MainViewModel();
-            loadDate();
         }
 
-        private void loadDate()
+        private void selectData(object sender, RoutedEventArgs e)
         {
             mainDataGrid.ItemsSource = ((MainViewModel)DataContext).Tracks
                 .Join(((MainViewModel)DataContext).Albums,
@@ -56,52 +56,21 @@ namespace WpfSQLite
                     mediaType.MName
                 })
                 .Join(((MainViewModel)DataContext).Genres,
-                trackWithAlbum => trackWithAlbum.Id,
+                trackWithAlbumAndMedia => trackWithAlbumAndMedia.Id,
                 genre => genre.TrackId,
-                (trackWithAlbum, genre) => new
+                (trackWithAlbumAndMedia, genre) => new
                 {
-                    trackWithAlbum.Id,
-                    trackWithAlbum.Name,
-                    trackWithAlbum.ATitle,
-                    trackWithAlbum.MName,
+                    trackWithAlbumAndMedia.Id,
+                    trackWithAlbumAndMedia.Name,
+                    trackWithAlbumAndMedia.ATitle,
+                    trackWithAlbumAndMedia.MName,
                     genre.GName
                 }).ToList();
         }
 
-        private void insertDate(object sender, RoutedEventArgs e)
+        private void clearData(object sender, RoutedEventArgs e)
         {
-            string title = textbox_title.Text;
-            string album = textbox_album.Text;
-            string mediatype = textbox_mediatype.Text;
-            string genre = textbox_genre.Text;
-
-            if (
-                !string.IsNullOrWhiteSpace(title) &&
-                !string.IsNullOrWhiteSpace(album) &&
-                !string.IsNullOrWhiteSpace(mediatype) &&
-                !string.IsNullOrWhiteSpace(genre) )
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
-                {
-                    connection.Open();
-                    string query = "";
-                }
-            }
-        }
-
-        private void selectDate(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void saveDate(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void clearDate(object sender, RoutedEventArgs e)
-        {
-
+            mainDataGrid.ItemsSource = null;
         }
     }
 }

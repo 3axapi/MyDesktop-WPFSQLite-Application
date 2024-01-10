@@ -28,46 +28,28 @@ namespace WpfSQLite
 
         public MainViewModel()
         {
-            Tracks = new List<Track>(); bool isT = true;
-            Albums = new List<Album>(); bool isA = true;
-            MediaTypes = new List<MediaType>(); bool isM = true;
-            Genres = new List<Genre>(); bool isG = true;
-
-            /*
-            SELECT albums.Title, tracks.TrackId
-            FROM tracks
-            INNER JOIN albums
-            ON tracks.AlbumId = albums.AlbumId
-            */
-
-            /*
-            SELECT media_types.Name, tracks.TrackId                         media_types
-            FROM tracks
-            INNER JOIN media_types
-            ON tracks.MediaTypeId = media_types.MediaTypeId
-            */
-
-            /*
-            SELECT genres.Name, tracks.TrackId                         genres
-            FROM tracks
-            INNER JOIN genres
-            ON tracks.GenreId = genres.GenreId
-            */
+            Tracks = new List<Track>();
+            Albums = new List<Album>();
+            MediaTypes = new List<MediaType>();
+            Genres = new List<Genre>();
 
             List<string> querys = new List<string>
             {
+                "SELECT TrackId, Name, AlbumId, MediaTypeId, GenreId" +
+                    " FROM tracks" +
+                    " LIMIT 6",
                 "SELECT albums.Title, tracks.TrackId" +
-                    "FROM tracks" +
-                    "INNER JOIN albums" +
-                    "ON tracks.AlbumId = albums.AlbumId",
+                    " FROM tracks" +
+                    " INNER JOIN albums" +
+                    " ON tracks.AlbumId = albums.AlbumId",
                 "SELECT media_types.Name, tracks.TrackId" +
-                    "FROM tracks" +
-                    "INNER JOIN media_types" +
-                    "ON tracks.MediaTypeId = media_types.MediaTypeId",
+                    " FROM tracks" +
+                    " INNER JOIN media_types" +
+                    " ON tracks.MediaTypeId = media_types.MediaTypeId",
                 "SELECT genres.Name, tracks.TrackId" +
-                    "FROM tracks" +
-                    "INNER JOIN genres" +
-                    "ON tracks.GenreId = genres.GenreId"
+                    " FROM tracks" +
+                    " INNER JOIN genres" +
+                    " ON tracks.GenreId = genres.GenreId"
             };
 
             foreach (string query in querys)
@@ -81,18 +63,18 @@ namespace WpfSQLite
                     {
                         while (reader.Read())
                         {
-                            if (isT)
+                            if (query == querys[0])
                             {
                                 Tracks.Add(new Track
                                 {
-                                    Id = Convert.ToInt16(reader["AlbumId"]),
+                                    Id = Convert.ToInt16(reader["TrackId"]),
                                     Name = reader["Name"].ToString(),
                                     AlbumId = Convert.ToInt16(reader["AlbumId"]),
                                     MediaTypeId = Convert.ToInt16(reader["MediaTypeId"]),
                                     GenreId = Convert.ToInt16(reader["GenreId"])
                                 });
                             }
-                            else if (isA)
+                            else if (query == querys[1])
                             {
                                 Albums.Add(new Album
                                 {
@@ -100,7 +82,7 @@ namespace WpfSQLite
                                     TrackId = Convert.ToInt16(reader["TrackId"]),
                                 });
                             }
-                            else if (isM)
+                            else if (query == querys[2])
                             {
                                 MediaTypes.Add(new MediaType
                                 {
@@ -108,7 +90,7 @@ namespace WpfSQLite
                                     TrackId = Convert.ToInt16(reader["TrackId"])
                                 });
                             }
-                            else if (isG)
+                            else if (query == querys[3])
                             {
                                 Genres.Add(new Genre
                                 {
@@ -117,10 +99,6 @@ namespace WpfSQLite
                                 });
                             }
                         }
-                        if (isT) isT = false;
-                        else if (isA) isA = false;
-                        else if (isM) isM = false;
-                        else if (isG) isG = false;
                     }
                 }
             }
